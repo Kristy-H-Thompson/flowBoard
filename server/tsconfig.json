@@ -1,6 +1,15 @@
 {
     "extends": "../tsconfig.json",
     "compilerOptions": {
+      "jsx": "react",  // for React 16 and earlier
+      // or use "react-jsx" for React 17+
+      "strict": true,
+      "esModuleInterop": true,
+      "skipLibCheck": true,
+      "target": "es5",
+      "module": "commonjs",
+      "moduleResolution": "node",
+      "exactOptionalPropertyTypes": false,
       /* Modules */
       "rootDir": "src" /* Specify the root folder within your source files. */,
   

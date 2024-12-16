@@ -1,5 +1,4 @@
 import { useState, FormEvent, ChangeEvent } from "react";
-
 import Auth from '../utils/auth';
 import { login } from "../api/authAPI";
 
@@ -21,7 +20,13 @@ const Login = () => {
     e.preventDefault();
     try {
       const data = await login(loginData);
-      Auth.login(data.token);
+      
+      // Type guard for `data`
+      if (data && data.token) {
+        Auth.login(data.token);
+      } else {
+        console.error('Login failed: No token returned');
+      }
     } catch (err) {
       console.error('Failed to login', err);
     }
@@ -38,7 +43,7 @@ const Login = () => {
           value={loginData.username || ''}
           onChange={handleChange}
         />
-      <label>Password</label>
+        <label>Password</label>
         <input 
           type='password'
           name='password'
@@ -48,7 +53,6 @@ const Login = () => {
         <button type='submit'>Submit Form</button>
       </form>
     </div>
-    
   )
 };
 
